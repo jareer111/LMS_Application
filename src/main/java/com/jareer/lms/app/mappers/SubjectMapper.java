@@ -2,6 +2,7 @@ package com.jareer.lms.app.mappers;
 
 import com.jareer.lms.app.domains.Subject;
 import com.jareer.lms.app.dtos.SubjectDTO;
+import com.jareer.lms.app.dtos.SubjectUpdateDTO;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
@@ -14,5 +15,5 @@ public interface SubjectMapper {
     SubjectDTO toDto(Subject subject);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    Subject partialUpdate(SubjectDTO subjectDTO, @MappingTarget Subject subject);
+    Subject partialUpdate(SubjectUpdateDTO subjectDTO, @MappingTarget Subject subject);
 }

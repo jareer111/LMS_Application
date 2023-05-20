@@ -1,15 +1,15 @@
 package com.jareer.lms.app.controllers;
 
-import com.jareer.lms.app.domains.Student;
+import com.jareer.lms.app.domains.user.Student;
 import com.jareer.lms.app.dtos.StudentDTO;
 import com.jareer.lms.app.dtos.ResponseDTO;
+import com.jareer.lms.app.dtos.StudentUpdateDTO;
 import com.jareer.lms.app.services.StudentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -19,7 +19,7 @@ public class StudentController {
     private final StudentService studentService;
 
     @PostMapping(value = "/create")
-    public ResponseEntity<ResponseDTO<Student>> createStudent(@Valid StudentDTO dto) {
+    public ResponseEntity<ResponseDTO<Student>> createStudent(@RequestBody @Valid StudentDTO dto) {
         Student student = studentService.createStudent(dto);
         return ResponseEntity.status(201).body(new ResponseDTO<>(student));
     }
@@ -32,9 +32,10 @@ public class StudentController {
     }
 
 
-    @GetMapping(value = "/getAll")
-    public ResponseEntity<ResponseDTO<List<Student>>> getAllStudent() {
-        List<Student> students = studentService.getAll();
+    @GetMapping(value = "/getPage")
+    public ResponseEntity<ResponseDTO<Page<Student>>> getPageStudent(@RequestParam(required = false, defaultValue = "0") Integer page,
+                                                                     @RequestParam(required = false, defaultValue = "15") Integer size) {
+        Page<Student> students = studentService.getAll(page, size);
         return ResponseEntity.ok(new ResponseDTO<>(students));
     }
 
@@ -47,8 +48,8 @@ public class StudentController {
 
 
     @PutMapping(value = "/update")
-    public ResponseEntity<ResponseDTO<Student>> updateStudent(@Valid StudentDTO dto, Integer id) {
-        Student student = studentService.updateStudent(dto, id);
+    public ResponseEntity<ResponseDTO<Student>> updateStudent(@RequestBody @Valid StudentUpdateDTO dto) {
+        Student student = studentService.updateStudent(dto);
         return ResponseEntity.status(200).body(new ResponseDTO<>(student));
     }
 

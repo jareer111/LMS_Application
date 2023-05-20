@@ -2,6 +2,7 @@ package com.jareer.lms.app.mappers;
 
 import com.jareer.lms.app.domains.Mark;
 import com.jareer.lms.app.dtos.MarkDTO;
+import com.jareer.lms.app.dtos.MarkUpdateDTO;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
@@ -14,5 +15,5 @@ public interface MarkMapper {
     MarkDTO toDto(Mark mark);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    Mark partialUpdate(MarkDTO markDTO, @MappingTarget Mark mark);
+    Mark partialUpdate(MarkUpdateDTO markDTO, @MappingTarget Mark mark);
 }

@@ -3,13 +3,13 @@ package com.jareer.lms.app.controllers;
 import com.jareer.lms.app.domains.University;
 import com.jareer.lms.app.dtos.ResponseDTO;
 import com.jareer.lms.app.dtos.UniversityDTO;
+import com.jareer.lms.app.dtos.UniversityUpdateDTO;
 import com.jareer.lms.app.services.UniversityService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -19,7 +19,7 @@ public class UniversityController {
     private final UniversityService universityService;
 
     @PostMapping(value = "/create")
-    public ResponseEntity<ResponseDTO<University>> createUniversity(@Valid UniversityDTO dto) {
+    public ResponseEntity<ResponseDTO<University>> createUniversity(@RequestBody @Valid UniversityDTO dto) {
         University university = universityService.createUniversity(dto);
         return ResponseEntity.status(201).body(new ResponseDTO<>(university));
     }
@@ -32,9 +32,10 @@ public class UniversityController {
     }
 
 
-    @GetMapping(value = "/getAll")
-    public ResponseEntity<ResponseDTO<List<University>>> getAllUniversity() {
-        List<University> universities = universityService.getAll();
+    @GetMapping(value = "/getPage")
+    public ResponseEntity<ResponseDTO<Page<University>>> getPageUniversity(@RequestParam(required = false, defaultValue = "0") Integer page,
+                                                                           @RequestParam(required = false, defaultValue = "15") Integer size) {
+        Page<University> universities = universityService.getPage(page, size);
         return ResponseEntity.ok(new ResponseDTO<>(universities));
     }
 
@@ -45,10 +46,9 @@ public class UniversityController {
         return ResponseEntity.noContent().build();
     }
 
-
     @PutMapping(value = "/update")
-    public ResponseEntity<ResponseDTO<University>> updateUniversity(@Valid UniversityDTO dto, Integer id) {
-        University university = universityService.updateUniversity(dto, id);
+    public ResponseEntity<ResponseDTO<University>> updateUniversity(@RequestBody @Valid UniversityUpdateDTO dto) {
+        University university = universityService.updateUniversity(dto);
         return ResponseEntity.status(200).body(new ResponseDTO<>(university));
     }
 

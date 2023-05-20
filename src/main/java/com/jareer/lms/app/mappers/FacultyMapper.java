@@ -2,6 +2,7 @@ package com.jareer.lms.app.mappers;
 
 import com.jareer.lms.app.domains.Faculty;
 import com.jareer.lms.app.dtos.FacultyDTO;
+import com.jareer.lms.app.dtos.FacultyUpdateDTO;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
@@ -14,5 +15,5 @@ public interface FacultyMapper {
     FacultyDTO toDto(Faculty faculty);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    Faculty partialUpdate(FacultyDTO facultyDTO, @MappingTarget Faculty faculty);
+    Faculty partialUpdate(FacultyUpdateDTO facultyDTO, @MappingTarget Faculty faculty);
 }

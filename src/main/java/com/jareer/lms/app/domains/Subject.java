@@ -17,14 +17,8 @@ import java.util.List;
 public class Subject {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-
-    @ManyToOne
-    @JoinColumn(name = "group_id")
-    private Group groupId;
-
-    @ManyToMany
-    private List<Journal> journal;
 
 }

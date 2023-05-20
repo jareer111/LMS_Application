@@ -2,6 +2,7 @@ package com.jareer.lms.app.mappers;
 
 import com.jareer.lms.app.domains.Group;
 import com.jareer.lms.app.dtos.GroupDTO;
+import com.jareer.lms.app.dtos.GroupUpdateDTO;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
@@ -14,5 +15,5 @@ public interface GroupMapper {
     GroupDTO toDto(Group group);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    Group partialUpdate(GroupDTO groupDTO, @MappingTarget Group group);
+    Group partialUpdate(GroupUpdateDTO groupDTO, @MappingTarget Group group);
 }

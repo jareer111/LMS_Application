@@ -1,10 +1,8 @@
 package com.jareer.lms.app.domains;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import com.jareer.lms.app.domains.user.Student;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +16,7 @@ import lombok.Setter;
 public class Mark {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne
@@ -26,6 +25,12 @@ public class Mark {
     @ManyToOne
     @JoinColumn(name = "journal_id")
     private Journal journal;
+
+    @ManyToOne
+    @JoinColumn(name = "subject_id")
+    private Subject subject;
+
+
     private short grade;
 
 }

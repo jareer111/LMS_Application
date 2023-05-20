@@ -3,11 +3,12 @@ package com.jareer.lms.app.services;
 
 import com.jareer.lms.app.domains.Journal;
 import com.jareer.lms.app.dtos.JournalDTO;
+import com.jareer.lms.app.dtos.JournalUpdateDTO;
 import com.jareer.lms.app.repositories.JournalRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 import static com.jareer.lms.app.mappers.JournalMapper.JOURNAL_MAPPER;
 
@@ -18,6 +19,7 @@ public class JournalService {
     private final JournalRepository journalRepository;
 
     public Journal createJournal(JournalDTO dto) {
+
         Journal journal = JOURNAL_MAPPER.toEntity(dto);
         return journalRepository.save(journal);
     }
@@ -26,16 +28,16 @@ public class JournalService {
         return journalRepository.findById(id).orElseThrow(() -> new RuntimeException("Journal not found with id: %d".formatted(id)));
     }
 
-    public List<Journal> getAll() {
-        return journalRepository.findAll();
+    public Page<Journal> getAll(Integer page, Integer size) {
+        return journalRepository.findAll(PageRequest.of(page, size));
     }
 
     public void deleteJournal(Integer id) {
         journalRepository.deleteById(id);
     }
 
-    public Journal updateJournal(JournalDTO dto, Integer id) {
-        Journal journal = getJournalById(id);
+    public Journal updateJournal(JournalUpdateDTO dto) {
+        Journal journal = getJournalById(dto.journalID());
         return journalRepository.save(JOURNAL_MAPPER.partialUpdate(dto, journal));
     }
 }

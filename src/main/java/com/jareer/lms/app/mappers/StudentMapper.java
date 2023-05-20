@@ -1,7 +1,8 @@
 package com.jareer.lms.app.mappers;
 
-import com.jareer.lms.app.domains.Student;
+import com.jareer.lms.app.domains.user.Student;
 import com.jareer.lms.app.dtos.StudentDTO;
+import com.jareer.lms.app.dtos.StudentUpdateDTO;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
@@ -14,5 +15,5 @@ public interface StudentMapper {
     StudentDTO toDto(Student student);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    Student partialUpdate(StudentDTO studentDTO, @MappingTarget Student student);
+    Student partialUpdate(StudentUpdateDTO studentDTO, @MappingTarget Student student);
 }

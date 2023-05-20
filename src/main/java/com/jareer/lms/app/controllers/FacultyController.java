@@ -3,13 +3,13 @@ package com.jareer.lms.app.controllers;
 import com.jareer.lms.app.domains.Faculty;
 import com.jareer.lms.app.dtos.FacultyDTO;
 import com.jareer.lms.app.dtos.ResponseDTO;
+import com.jareer.lms.app.dtos.FacultyUpdateDTO;
 import com.jareer.lms.app.services.FacultyService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -19,7 +19,7 @@ public class FacultyController {
     private final FacultyService facultyService;
 
     @PostMapping(value = "/create")
-    public ResponseEntity<ResponseDTO<Faculty>> createFaculty(@Valid FacultyDTO dto) {
+    public ResponseEntity<ResponseDTO<Faculty>> createFaculty(@RequestBody @Valid FacultyDTO dto) {
         Faculty fakultet = facultyService.createFaculty(dto);
         return ResponseEntity.status(201).body(new ResponseDTO<>(fakultet));
     }
@@ -32,9 +32,10 @@ public class FacultyController {
     }
 
 
-    @GetMapping(value = "/getAll")
-    public ResponseEntity<ResponseDTO<List<Faculty>>> getAllFaculty() {
-        List<Faculty> faculities = facultyService.getAll();
+    @GetMapping(value = "/getPage")
+    public ResponseEntity<ResponseDTO<Page<Faculty>>> getPageFaculty(@RequestParam(required = false, defaultValue = "0") Integer page,
+                                                                     @RequestParam(required = false, defaultValue = "15") Integer size) {
+        Page<Faculty> faculities = facultyService.getPage(page, size);
         return ResponseEntity.ok(new ResponseDTO<>(faculities));
     }
 
@@ -47,8 +48,8 @@ public class FacultyController {
 
 
     @PutMapping(value = "/update")
-    public ResponseEntity<ResponseDTO<Faculty>> updateFaculty(@Valid FacultyDTO dto, Integer id) {
-        Faculty fakultet = facultyService.updateFaculty(dto, id);
+    public ResponseEntity<ResponseDTO<Faculty>> updateFaculty(@RequestBody @Valid FacultyUpdateDTO dto) {
+        Faculty fakultet = facultyService.updateFaculty(dto);
         return ResponseEntity.status(200).body(new ResponseDTO<>(fakultet));
     }
 

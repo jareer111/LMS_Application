@@ -1,13 +1,16 @@
 package com.jareer.lms.app.services;
 
 
-import com.jareer.lms.app.domains.Student;
+import com.jareer.lms.app.domains.Group;
+import com.jareer.lms.app.domains.user.Student;
 import com.jareer.lms.app.dtos.StudentDTO;
+import com.jareer.lms.app.dtos.StudentUpdateDTO;
+import com.jareer.lms.app.repositories.GroupRepository;
 import com.jareer.lms.app.repositories.StudentRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 import static com.jareer.lms.app.mappers.StudentMapper.STUDENT_MAPPER;
 
@@ -16,9 +19,14 @@ import static com.jareer.lms.app.mappers.StudentMapper.STUDENT_MAPPER;
 @RequiredArgsConstructor
 public class StudentService {
     private final StudentRepository studentRepository;
+    private final GroupRepository groupRepositories;
 
     public Student createStudent(StudentDTO dto) {
+        int groupID = dto.groupID();
+        Group group = groupRepositories.findById(groupID).orElseThrow(
+                () -> new RuntimeException("Group not found with id: %d".formatted(groupID)));
         Student student = STUDENT_MAPPER.toEntity(dto);
+        student.setGroup(group);
         return studentRepository.save(student);
     }
 
@@ -26,16 +34,16 @@ public class StudentService {
         return studentRepository.findById(id).orElseThrow(() -> new RuntimeException("Student not found with id: %d".formatted(id)));
     }
 
-    public List<Student> getAll() {
-        return studentRepository.findAll();
+    public Page<Student> getAll(Integer page, Integer size) {
+        return studentRepository.findAll(PageRequest.of(page, size));
     }
 
     public void deleteStudent(Integer id) {
         studentRepository.deleteById(id);
     }
 
-    public Student updateStudent(StudentDTO dto, Integer id) {
-        Student student = getStudentById(id);
+    public Student updateStudent(StudentUpdateDTO dto) {
+        Student student = getStudentById(dto.studentID());
         return studentRepository.save(STUDENT_MAPPER.partialUpdate(dto, student));
     }
 }

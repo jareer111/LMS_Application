@@ -2,14 +2,14 @@ package com.jareer.lms.app.controllers;
 
 import com.jareer.lms.app.domains.Mark;
 import com.jareer.lms.app.dtos.MarkDTO;
+import com.jareer.lms.app.dtos.MarkUpdateDTO;
 import com.jareer.lms.app.dtos.ResponseDTO;
 import com.jareer.lms.app.services.MarkService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -19,7 +19,7 @@ public class MarkController {
     private final MarkService markService;
 
     @PostMapping(value = "/create")
-    public ResponseEntity<ResponseDTO<Mark>> createMark(@Valid MarkDTO dto) {
+    public ResponseEntity<ResponseDTO<Mark>> createMark(@RequestBody @Valid MarkDTO dto) {
         Mark mark = markService.createMark(dto);
         return ResponseEntity.status(201).body(new ResponseDTO<>(mark));
     }
@@ -32,9 +32,10 @@ public class MarkController {
     }
 
 
-    @GetMapping(value = "/getAll")
-    public ResponseEntity<ResponseDTO<List<Mark>>> getAllMark() {
-        List<Mark> mark = markService.getAll();
+    @GetMapping(value = "/getPage")
+    public ResponseEntity<ResponseDTO<Page<Mark>>> getPageMark(@RequestParam(required = false, defaultValue = "0") Integer page,
+                                                               @RequestParam(required = false, defaultValue = "15") Integer size) {
+        Page<Mark> mark = markService.getAll(page, size);
         return ResponseEntity.ok(new ResponseDTO<>(mark));
     }
 
@@ -47,8 +48,8 @@ public class MarkController {
 
 
     @PutMapping(value = "/update")
-    public ResponseEntity<ResponseDTO<Mark>> updateMark(@Valid MarkDTO dto, Integer id) {
-        Mark mark = markService.updateMark(dto, id);
+    public ResponseEntity<ResponseDTO<Mark>> updateMark(@RequestBody @Valid MarkUpdateDTO dto) {
+        Mark mark = markService.updateMark(dto);
         return ResponseEntity.status(200).body(new ResponseDTO<>(mark));
     }
 

@@ -3,13 +3,13 @@ package com.jareer.lms.app.controllers;
 import com.jareer.lms.app.domains.Subject;
 import com.jareer.lms.app.dtos.ResponseDTO;
 import com.jareer.lms.app.dtos.SubjectDTO;
+import com.jareer.lms.app.dtos.SubjectUpdateDTO;
 import com.jareer.lms.app.services.SubjectService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -32,9 +32,10 @@ public class SubjectController {
     }
 
 
-    @GetMapping(value = "/getAll")
-    public ResponseEntity<ResponseDTO<List<Subject>>> getAllSubject() {
-        List<Subject> subjects = subjectService.getAll();
+    @GetMapping(value = "/getPage")
+    public ResponseEntity<ResponseDTO<Page<Subject>>> getPageSubject(@RequestParam(required = false, defaultValue = "0") Integer page,
+                                                                     @RequestParam(required = false, defaultValue = "15") Integer size) {
+        Page<Subject> subjects = subjectService.getAll(page, size);
         return ResponseEntity.ok(new ResponseDTO<>(subjects));
     }
 
@@ -47,8 +48,8 @@ public class SubjectController {
 
 
     @PutMapping(value = "/update")
-    public ResponseEntity<ResponseDTO<Subject>> updateSubject(@Valid SubjectDTO dto, Integer id) {
-        Subject subject = subjectService.updateSubject(dto, id);
+    public ResponseEntity<ResponseDTO<Subject>> updateSubject(@RequestBody @Valid SubjectUpdateDTO dto) {
+        Subject subject = subjectService.updateSubject(dto);
         return ResponseEntity.status(200).body(new ResponseDTO<>(subject));
     }
 

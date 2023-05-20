@@ -2,6 +2,7 @@ package com.jareer.lms.app.mappers;
 
 import com.jareer.lms.app.domains.Journal;
 import com.jareer.lms.app.dtos.JournalDTO;
+import com.jareer.lms.app.dtos.JournalUpdateDTO;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
@@ -14,5 +15,5 @@ public interface JournalMapper {
     JournalDTO toDto(Journal journal);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    Journal partialUpdate(JournalDTO journalDTO, @MappingTarget Journal journal);
+    Journal partialUpdate(JournalUpdateDTO journalDTO, @MappingTarget Journal journal);
 }

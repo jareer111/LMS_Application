@@ -2,6 +2,8 @@ package com.jareer.lms.app.domains;
 
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,9 +18,10 @@ import lombok.Setter;
 public class University {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String address;
-    private short openYear;
+    private Integer openYear;
 
 }
