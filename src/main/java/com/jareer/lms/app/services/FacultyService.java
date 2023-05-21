@@ -5,6 +5,7 @@ import com.jareer.lms.app.domains.Faculty;
 import com.jareer.lms.app.domains.University;
 import com.jareer.lms.app.dtos.FacultyDTO;
 import com.jareer.lms.app.dtos.FacultyUpdateDTO;
+import com.jareer.lms.app.exceptions.ItemNotFoundException;
 import com.jareer.lms.app.repositories.FacultyRepository;
 import com.jareer.lms.app.repositories.UniversityRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,15 +24,14 @@ public class FacultyService {
 
     public Faculty createFaculty(FacultyDTO dto) {
         int universityID = dto.universityID();
-        University university = universityRepository.findById(universityID).orElseThrow(
-                () -> new RuntimeException("University not found with id: %d".formatted(universityID)));
+        University university = universityRepository.findById(universityID).orElseThrow(() -> new ItemNotFoundException("University not found with id: %d".formatted(universityID)));
         Faculty faculty = FACULTY_MAPPER.toEntity(dto);
         faculty.setUniversity(university);
         return facultyRepository.save(faculty);
     }
 
     public Faculty getFacultyById(Integer id) {
-        return facultyRepository.findById(id).orElseThrow(() -> new RuntimeException("Faculty not found with id: %d".formatted(id)));
+        return facultyRepository.findById(id).orElseThrow(() -> new ItemNotFoundException("Faculty not found with id: %d".formatted(id)));
     }
 
     public Page<Faculty> getPage(Integer page, Integer size) {
@@ -39,7 +39,9 @@ public class FacultyService {
     }
 
     public void deleteFaculty(Integer id) {
-        facultyRepository.deleteById(id);
+        Faculty faculty = facultyRepository.findById(id).orElseThrow(() -> new ItemNotFoundException("Faculty not found with id: %d".formatted(id)));
+        faculty.setDeleted(true);
+        facultyRepository.save(faculty);
     }
 
     public Faculty updateFaculty(FacultyUpdateDTO dto) {

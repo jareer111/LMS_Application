@@ -31,10 +31,14 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "group_id")
+    private Group group;
+
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     @Builder.Default
-    private Role role = Role.USER;
+    private Role role = Role.STUDENT;
 
     @Builder.Default
     @Enumerated(EnumType.STRING)
@@ -74,4 +78,6 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return UserStatus.ACTIVE.equals(this.status);
     }
+
+
 }

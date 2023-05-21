@@ -12,6 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"name", "university_id"}))
 public class Faculty {
 
     @Id
@@ -22,5 +23,7 @@ public class Faculty {
     @ManyToOne
     @JoinColumn(name = "university_id")
     private University university;
+
+    private boolean deleted;
 
 }

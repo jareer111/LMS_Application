@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
-
 import java.security.Key;
 import java.util.Date;
 
@@ -44,7 +43,7 @@ public class JwtUtils {
         String refreshToken = Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(new Date())
-                .setIssuer("https://online.pdp.uz")
+                .setIssuer("https://www.linkedin.com/in/jareer111")
                 .setExpiration(tokenResponse.getRefreshTokenExpiry())
                 .signWith(signKey(REFRESH), SignatureAlgorithm.HS256)
                 .compact();
@@ -65,11 +64,6 @@ public class JwtUtils {
         return tokenResponse;
     }
 
-    public static void main(String[] args) {
-        String regex="^[A-Z0-9_!#$%&'*+/=?`{|}~^-]+(?:\\.[A-Z0-9_!#$%&'*+/=?`{|}~^-]+↵\n" +
-                ")*@[A-Z0-9-]+(?:\\.[A-Z0-9-]+)*$";
-        String dd="dsfvf".matches(regex)?"true":"false";
-    }
 
     public boolean isTokenValid(@NonNull String token, TokenType tokenType) {
         try {

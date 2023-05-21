@@ -8,7 +8,6 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-
 import java.util.Objects;
 
 @Component
@@ -24,7 +23,6 @@ public class SessionUser {
             User byEmail = userRepository.findByEmail(name);
             System.out.println(byEmail);
             return byEmail;
-
         }
         return null;
     }

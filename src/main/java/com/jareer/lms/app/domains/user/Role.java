@@ -14,7 +14,7 @@ import static com.jareer.lms.app.domains.user.Permission.*;
 @RequiredArgsConstructor
 public enum Role {
 
-    USER(Collections.emptySet()),
+    STUDENT(Collections.emptySet()),
     ADMIN(
             Set.of(
                     ADMIN_READ,

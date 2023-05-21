@@ -1,10 +1,7 @@
 package com.jareer.lms.app.domains;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"name", "address"}))
 public class University {
 
     @Id
@@ -23,5 +21,6 @@ public class University {
     private String name;
     private String address;
     private Integer openYear;
+    private boolean deleted;
 
 }

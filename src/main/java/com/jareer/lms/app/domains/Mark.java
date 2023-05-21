@@ -1,7 +1,7 @@
 package com.jareer.lms.app.domains;
 
 
-import com.jareer.lms.app.domains.user.Student;
+import com.jareer.lms.app.domains.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,8 +20,11 @@ public class Mark {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "student_id")
-    private Student student;
+    @JoinColumn(name = "user_id")
+    private User student;
+    @ManyToOne
+    @JoinColumn(name = "teacher_id")
+    private User teacher;
     @ManyToOne
     @JoinColumn(name = "journal_id")
     private Journal journal;
@@ -32,5 +35,6 @@ public class Mark {
 
 
     private short grade;
+    private boolean deleted;
 
 }

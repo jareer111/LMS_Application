@@ -2,13 +2,14 @@ package com.jareer.lms.app.controllers;
 
 import com.jareer.lms.app.domains.Faculty;
 import com.jareer.lms.app.dtos.FacultyDTO;
-import com.jareer.lms.app.dtos.ResponseDTO;
 import com.jareer.lms.app.dtos.FacultyUpdateDTO;
+import com.jareer.lms.app.dtos.ResponseDTO;
 import com.jareer.lms.app.services.FacultyService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class FacultyController {
     private final FacultyService facultyService;
 
+    @PreAuthorize("hasAuthority('admin:create')")
     @PostMapping(value = "/create")
     public ResponseEntity<ResponseDTO<Faculty>> createFaculty(@RequestBody @Valid FacultyDTO dto) {
         Faculty fakultet = facultyService.createFaculty(dto);
@@ -39,14 +41,14 @@ public class FacultyController {
         return ResponseEntity.ok(new ResponseDTO<>(faculities));
     }
 
-
+    @PreAuthorize("hasAuthority('admin:delete')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<ResponseDTO<Void>> deleteFaculty(@PathVariable Integer id) {
         facultyService.deleteFaculty(id);
         return ResponseEntity.noContent().build();
     }
 
-
+    @PreAuthorize("hasAuthority('admin:update')")
     @PutMapping(value = "/update")
     public ResponseEntity<ResponseDTO<Faculty>> updateFaculty(@RequestBody @Valid FacultyUpdateDTO dto) {
         Faculty fakultet = facultyService.updateFaculty(dto);

@@ -1,17 +1,15 @@
 package com.jareer.lms.app.services;
 
 
-import com.jareer.lms.app.domains.Group;
 import com.jareer.lms.app.domains.Subject;
 import com.jareer.lms.app.dtos.SubjectDTO;
 import com.jareer.lms.app.dtos.SubjectUpdateDTO;
+import com.jareer.lms.app.exceptions.ItemNotFoundException;
 import com.jareer.lms.app.repositories.SubjectRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 import static com.jareer.lms.app.mappers.SubjectMapper.SUBJECT_MAPPER;
 
@@ -28,7 +26,7 @@ public class SubjectService {
     }
 
     public Subject getSubjectById(Integer id) {
-        return subjectRepository.findById(id).orElseThrow(() -> new RuntimeException("Subject not found with id: %d".formatted(id)));
+        return subjectRepository.findById(id).orElseThrow(() -> new ItemNotFoundException("Subject not found with id: %d".formatted(id)));
     }
 
     public Page<Subject> getAll(Integer page, Integer size) {
@@ -36,7 +34,9 @@ public class SubjectService {
     }
 
     public void deleteSubject(Integer id) {
-        subjectRepository.deleteById(id);
+        Subject subject = subjectRepository.findById(id).orElseThrow(() -> new ItemNotFoundException("Subject not found with id: %d".formatted(id)));
+        subject.setDeleted(true);
+        subjectRepository.save(subject);
     }
 
     public Subject updateSubject(SubjectUpdateDTO dto) {

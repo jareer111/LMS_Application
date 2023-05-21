@@ -4,6 +4,7 @@ package com.jareer.lms.app.services;
 import com.jareer.lms.app.domains.University;
 import com.jareer.lms.app.dtos.UniversityDTO;
 import com.jareer.lms.app.dtos.UniversityUpdateDTO;
+import com.jareer.lms.app.exceptions.ItemNotFoundException;
 import com.jareer.lms.app.repositories.UniversityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -24,19 +25,23 @@ public class UniversityService {
     }
 
     public University getUniversityById(Integer id) {
-        return universityRepository.findById(id).orElseThrow(() -> new RuntimeException("University not found"));
+        return universityRepository.findUniversityById(id).orElseThrow(() -> new ItemNotFoundException("University not found"));
     }
 
     public Page<University> getPage(Integer page, Integer size) {
-        return universityRepository.findAll(PageRequest.of(page, size));
+        return universityRepository.findAllUniversity(PageRequest.of(page, size));
     }
 
     public void deleteUniversity(Integer id) {
-        universityRepository.deleteById(id);
+        University university = universityRepository.findUniversityById(id).orElseThrow(() -> new ItemNotFoundException("University not found with id: %d".formatted(id)));
+        university.setDeleted(true);
+        universityRepository.save(university);
     }
 
     public University updateUniversity(UniversityUpdateDTO dto) {
-        University university = getUniversityById(dto.universityID());
+        Integer universityID = dto.universityID();
+        University university = universityRepository.findUniversityById(universityID).orElseThrow(
+                () -> new ItemNotFoundException("University not found with id: %d".formatted(universityID)));
         University updateUniversity = UNIVERSITY_MAPPER.partialUpdate(dto, university);
         return universityRepository.save(updateUniversity);
     }

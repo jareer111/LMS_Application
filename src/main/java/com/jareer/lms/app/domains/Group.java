@@ -7,8 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Setter
 @Getter
 @NoArgsConstructor
@@ -19,15 +17,11 @@ public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(unique = true)
     private String name;
     @ManyToOne
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
-
-    @OneToOne
-    private Journal journal;
-
     private short year;
-
-
+    private boolean deleted;
 }

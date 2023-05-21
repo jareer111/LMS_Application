@@ -1,49 +1,32 @@
 package com.jareer.lms.app.services;
 
-
 import com.jareer.lms.app.domains.Group;
-import com.jareer.lms.app.domains.user.Student;
-import com.jareer.lms.app.dtos.StudentDTO;
-import com.jareer.lms.app.dtos.StudentUpdateDTO;
+import com.jareer.lms.app.domains.Subject;
+import com.jareer.lms.app.exceptions.ItemNotFoundException;
 import com.jareer.lms.app.repositories.GroupRepository;
-import com.jareer.lms.app.repositories.StudentRepository;
+import com.jareer.lms.app.repositories.JournalRepository;
+import com.jareer.lms.app.repositories.SubjectRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import static com.jareer.lms.app.mappers.StudentMapper.STUDENT_MAPPER;
-
+import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
 public class StudentService {
-    private final StudentRepository studentRepository;
-    private final GroupRepository groupRepositories;
 
-    public Student createStudent(StudentDTO dto) {
-        int groupID = dto.groupID();
-        Group group = groupRepositories.findById(groupID).orElseThrow(
-                () -> new RuntimeException("Group not found with id: %d".formatted(groupID)));
-        Student student = STUDENT_MAPPER.toEntity(dto);
-        student.setGroup(group);
-        return studentRepository.save(student);
+    private final SubjectRepository subjectRepository;
+    private final JournalRepository journalRepository;
+    private final GroupRepository groupRepository;
+
+
+    public List<Subject> getSubjectList(Integer studentID) {
+        return subjectRepository.findSubjectsByStudentId(studentID).orElseThrow(() -> new ItemNotFoundException("Subjects not found for student with id: %d".formatted(studentID)));
     }
 
-    public Student getStudentById(Integer id) {
-        return studentRepository.findById(id).orElseThrow(() -> new RuntimeException("Student not found with id: %d".formatted(id)));
-    }
-
-    public Page<Student> getAll(Integer page, Integer size) {
-        return studentRepository.findAll(PageRequest.of(page, size));
-    }
-
-    public void deleteStudent(Integer id) {
-        studentRepository.deleteById(id);
-    }
-
-    public Student updateStudent(StudentUpdateDTO dto) {
-        Student student = getStudentById(dto.studentID());
-        return studentRepository.save(STUDENT_MAPPER.partialUpdate(dto, student));
+    public Map<Group, Integer> getFacultyList(Integer facultyId) {
+        groupRepository.findGroupsAndCountStudentsByFacultyId(facultyId).orElseThrow(() -> new ItemNotFoundException("Groups not found for faculty with id: %d".formatted(facultyId)));
+        return null;
     }
 }

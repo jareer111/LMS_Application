@@ -1,4 +1,4 @@
 package com.jareer.lms.app.dtos;
 
-public record JournalDTO(String name) {
+public record JournalDTO(String name, Integer groupID) {
 }

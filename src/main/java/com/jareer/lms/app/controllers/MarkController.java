@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class MarkController {
     private final MarkService markService;
 
+    @PreAuthorize("hasAnyAuthority('admin:create','teacher:create')")
     @PostMapping(value = "/create")
     public ResponseEntity<ResponseDTO<Mark>> createMark(@RequestBody @Valid MarkDTO dto) {
         Mark mark = markService.createMark(dto);
@@ -39,14 +41,14 @@ public class MarkController {
         return ResponseEntity.ok(new ResponseDTO<>(mark));
     }
 
-
+    @PreAuthorize("hasAnyAuthority('admin:delete','teacher:delete')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<ResponseDTO<Void>> deleteMark(@PathVariable Integer id) {
         markService.deleteMark(id);
         return ResponseEntity.noContent().build();
     }
 
-
+    @PreAuthorize("hasAnyAuthority('admin:update','teacher:update')")
     @PutMapping(value = "/update")
     public ResponseEntity<ResponseDTO<Mark>> updateMark(@RequestBody @Valid MarkUpdateDTO dto) {
         Mark mark = markService.updateMark(dto);
