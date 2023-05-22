@@ -1,0 +1,1171 @@
+{
+	"info": {
+		"_postman_id": "bba3b258-a131-4d6e-b0b9-68f67a803747",
+		"name": "LMS_Application",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "26630955"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@gmail.com\",\n    \"password\": \"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							],
+							"query": [
+								{
+									"key": "role",
+									"value": "user",
+									"disabled": true
+								},
+								{
+									"key": "userId",
+									"value": "12",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Access token",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@gmail.com\",\n    \"password\": \"123\"   \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/auth/access/token"
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh token",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYXZvaGlyQGdtYWlsLmNvbSIsImlhdCI6MTY4NDU3NzcyMCwiaXNzIjoiaHR0cHM6Ly9vbmxpbmUucGRwLnV6IiwiZXhwIjoxNjg1NDQxNzIwfQ.   fcEtGwroF-bjGkbR8ANYenC53i_dKoAcXxCKC_1ZdGk\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/auth/refresh/token"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "4 tasks",
+			"item": [
+				{
+					"name": "addGroupByStuden",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE2ODQ2Nzg2MjIsImlzcyI6Imh0dHBzOi8vb25saW5lLnBkcC51eiIsImV4cCI6MTY4NDY4MjIyMn0.9n7eJo5lTHhnOa4lhKobS_qF13KoPBUUQtmMmWoaNqp3egsfkRowhaEjPXAw1SIYQn5FE-rRxHjJmlHCVXzW5Q"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/group/addGroupByStudent?groupID=1&studentID=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"group",
+								"addGroupByStudent"
+							],
+							"query": [
+								{
+									"key": "groupID",
+									"value": "1"
+								},
+								{
+									"key": "studentID",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Subject list by student id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/student/subjectLists?studentID=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"student",
+								"subjectLists"
+							],
+							"query": [
+								{
+									"key": "studentID",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Groups and count students list by faculty id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/v1/student/groupListsByFacultyId/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Get student By Username",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/student/studentByFullName?studentFullName=1 student",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"student",
+								"studentByFullName"
+							],
+							"query": [
+								{
+									"key": "studentFullName",
+									"value": "1 student"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get students And Marks List By GroupId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/student/studentsAndMarksListByGroupId?groupId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"student",
+								"studentsAndMarksListByGroupId"
+							],
+							"query": [
+								{
+									"key": "groupId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "University",
+			"item": [
+				{
+					"name": "Create University",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE2ODQ3NDQ4NzAsImlzcyI6Imh0dHBzOi8vb25saW5lLnBkcC51eiIsImV4cCI6MTY4NDc0ODQ3MH0.6kXKlXQAWPnb0v05FANj1z1wQqxX7BPlMhE5q_vygyEOizFGyejwRUc_hxf3DKO0-Vv2N2ToTzcvhXAUx-V3_g"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"TUIT\",\n    \"address\": \"Tashkent\",\n    \"openYear\": 2023\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/university/create"
+					},
+					"response": []
+				},
+				{
+					"name": "Update University",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"PDP University\",\n    \"openYear\": 2050,\n    \"universityID\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/university/update"
+					},
+					"response": []
+				},
+				{
+					"name": "Get University",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/university/get/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Page University",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/university/getPage?page=0&size=12",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"university",
+								"getPage"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "12"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete University",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"PDP\",\"address\":\"Tashkent\",\"openYear\":2022}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/university/delete/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Faculity",
+			"item": [
+				{
+					"name": "Create Faculty",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE2ODQ3NDQ4NzAsImlzcyI6Imh0dHBzOi8vb25saW5lLnBkcC51eiIsImV4cCI6MTY4NDc0ODQ3MH0.6kXKlXQAWPnb0v05FANj1z1wQqxX7BPlMhE5q_vygyEOizFGyejwRUc_hxf3DKO0-Vv2N2ToTzcvhXAUx-V3_g"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Matematika\",\n    \"universityID\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/faculty/create"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Faculty",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Matematika\",\n    \"facultyID\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/faculty/update"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Faculty",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/faculty/get/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Page Faculty",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/faculty/getPage?page=0&size=12",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"faculty",
+								"getPage"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "12"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Faculty",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"PDP\",\"address\":\"Tashkent\",\"openYear\":2022}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/faculty/delete/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Group",
+			"item": [
+				{
+					"name": "Create Group",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE2ODQ3NDQ4NzAsImlzcyI6Imh0dHBzOi8vb25saW5lLnBkcC51eiIsImV4cCI6MTY4NDc0ODQ3MH0.6kXKlXQAWPnb0v05FANj1z1wQqxX7BPlMhE5q_vygyEOizFGyejwRUc_hxf3DKO0-Vv2N2ToTzcvhXAUx-V3_g"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"A-3\",\n    \"year\": 2022,\n    \"facultyID\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/group/create"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Group",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"B-1\",\n    \"year\": 2023,\n    \"facultyID\": 1,\n    \"groupID\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/group/update"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Group",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/group/get/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Page Group",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE2ODQ3Mzk5OTEsImlzcyI6Imh0dHBzOi8vb25saW5lLnBkcC51eiIsImV4cCI6MTY4NDc0MzU5MX0.AgqcAIT-tI7rQslnXHLie_5QMvucNGQGYdTv96t4_eEKTXPVPyikQsNnG5HWIo9NY13kcFKdOW7bfAzaeSOrNw"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/group/getPage?page=0&size=12",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"group",
+								"getPage"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "12"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Group",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"PDP\",\"address\":\"Tashkent\",\"openYear\":2022}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/group/delete/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Journal",
+			"item": [
+				{
+					"name": "Create Journal",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE2ODQ2NzgyOTIsImlzcyI6Imh0dHBzOi8vb25saW5lLnBkcC51eiIsImV4cCI6MTY4NDY4MTg5Mn0.tsG8A8GndUe9VcHjx5HYk_GIBlCqSphcGIOPIVRbqBYRnmbPCGXbkY3uXdQvZsA3oPjjIykSy6EHNG32ar5o_Q"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Journal A-1\",\n    \"groupID\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/journal/create"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Journal",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Journal B-1\",\n    \"groupID\": 1,\n    \"journalID\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/journal/update"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Journal",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE2ODQ2NzY5ODksImlzcyI6Imh0dHBzOi8vb25saW5lLnBkcC51eiIsImV4cCI6MTY4NDY4MDU4OX0.Mo1ze4gbDcmpmnqUyA37UAqYXxieWAX5N1VLef5ScYs0_lV4TjrUd7wI218zI0h5XYvTVMF-FAxBHR5PCsY1WA"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/journal/get/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Page Journal",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/journal/getPage?page=0&size=12",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"journal",
+								"getPage"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "12"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Journal",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"PDP\",\"address\":\"Tashkent\",\"openYear\":2022}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/journal/delete/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Subject by Journal",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE2ODQ2NzY1MDcsImlzcyI6Imh0dHBzOi8vb25saW5lLnBkcC51eiIsImV4cCI6MTY4NDY4MDEwN30.h4O1N4Z8MCtt3QBKpRPWrAbOpmk8OqKhEBdRMELuJv1r7FX319hDTvpYNvjXGm7HeSDZdRvWp_35BKUrEUljvQ"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/journal/addSubject?journalId=1&subjectId=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"journal",
+								"addSubject"
+							],
+							"query": [
+								{
+									"key": "journalId",
+									"value": "1"
+								},
+								{
+									"key": "subjectId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Student by Journal",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE2ODQ2NzY1MDcsImlzcyI6Imh0dHBzOi8vb25saW5lLnBkcC51eiIsImV4cCI6MTY4NDY4MDEwN30.h4O1N4Z8MCtt3QBKpRPWrAbOpmk8OqKhEBdRMELuJv1r7FX319hDTvpYNvjXGm7HeSDZdRvWp_35BKUrEUljvQ"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/journal/addStudent?journalId=1&studentId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"journal",
+								"addStudent"
+							],
+							"query": [
+								{
+									"key": "journalId",
+									"value": "1"
+								},
+								{
+									"key": "studentId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Subject",
+			"item": [
+				{
+					"name": "Create Subject",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE2ODQ2NzgyOTIsImlzcyI6Imh0dHBzOi8vb25saW5lLnBkcC51eiIsImV4cCI6MTY4NDY4MTg5Mn0.tsG8A8GndUe9VcHjx5HYk_GIBlCqSphcGIOPIVRbqBYRnmbPCGXbkY3uXdQvZsA3oPjjIykSy6EHNG32ar5o_Q"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Fizika\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/subject/create"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Subject",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Matematika va Informatika\",\n    \"subjectID\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/subject/update"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Subject",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/subject/get/3"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Page Subject",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/faculty/getPage?page=0&size=12",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"faculty",
+								"getPage"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "12"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Subject",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE2ODQ2NzY5NDEsImlzcyI6Imh0dHBzOi8vb25saW5lLnBkcC51eiIsImV4cCI6MTY4NDY4MDU0MX0.8cXDE-Zubkl5zw5soA7R0EzXO2r5CHNdJpL5bNsB53H4YBdyEwrYgMy7PomoRVU6SS3EynwUx2KtdCPTZuCMWA"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"PDP\",\"address\":\"Tashkent\",\"openYear\":2022}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/subject/delete/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Mark",
+			"item": [
+				{
+					"name": "Create mark",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE2ODQ2NzgyOTIsImlzcyI6Imh0dHBzOi8vb25saW5lLnBkcC51eiIsImV4cCI6MTY4NDY4MTg5Mn0.tsG8A8GndUe9VcHjx5HYk_GIBlCqSphcGIOPIVRbqBYRnmbPCGXbkY3uXdQvZsA3oPjjIykSy6EHNG32ar5o_Q"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZWFjaGVyQGdtYWlsLmNvbSIsImlhdCI6MTY4NDY2NzM0NCwiaXNzIjoiaHR0cHM6Ly9vbmxpbmUucGRwLnV6IiwiZXhwIjoxNjg0NjY3OTQ0fQ.WxnlB4RyVkCqyZ1NRxrumvOWC4gbRRfWvK28n7piU-_2E3cKWrpGkvZmJjT2QomDYrqD1LrRqJNu9AgN8vLaZg",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"grade\": 5,\n    \"journalID\":1,\n    \"studentID\":1,\n    \"subjectID\":1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/mark/create"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Mark",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE2ODQ2Njk4OTIsImlzcyI6Imh0dHBzOi8vb25saW5lLnBkcC51eiIsImV4cCI6MTY4NDY3MDQ5Mn0.FdYt3qt2KW8l720HW_Ve0Otpq3DyS4LCT_2rlMDXtAkIp8bkKedOHfZCfsGHodjjLOhBSYquACrtv69IrxprDA"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Matematika va Informatika\",\n    \"subjectID\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/mark/update"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Mark",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE2ODQ2NzAwODksImlzcyI6Imh0dHBzOi8vb25saW5lLnBkcC51eiIsImV4cCI6MTY4NDY3MDY4OX0.96hFLqwLnnrMpe3QbpYKlc9cAetndMlcJjqFfO33iQARPjEYM3w8zeN_pMfvRhlu23DT2RQTFklwnQQ6e-9ZSw"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/mark/get/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Page Mark",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE2ODQ2NzAwODksImlzcyI6Imh0dHBzOi8vb25saW5lLnBkcC51eiIsImV4cCI6MTY4NDY3MDY4OX0.96hFLqwLnnrMpe3QbpYKlc9cAetndMlcJjqFfO33iQARPjEYM3w8zeN_pMfvRhlu23DT2RQTFklwnQQ6e-9ZSw"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/mark/getPage?page=0&size=12",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"mark",
+								"getPage"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "12"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete mark",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE2ODQ2NzAwODksImlzcyI6Imh0dHBzOi8vb25saW5lLnBkcC51eiIsImV4cCI6MTY4NDY3MDY4OX0.96hFLqwLnnrMpe3QbpYKlc9cAetndMlcJjqFfO33iQARPjEYM3w8zeN_pMfvRhlu23DT2RQTFklwnQQ6e-9ZSw"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"PDP\",\"address\":\"Tashkent\",\"openYear\":2022}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/mark/delete/1"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
