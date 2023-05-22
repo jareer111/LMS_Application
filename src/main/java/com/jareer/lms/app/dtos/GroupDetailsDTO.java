@@ -1,7 +1,5 @@
 package com.jareer.lms.app.dtos;
 
-public record GroupDetailsDTO(
-        String name,
-        short year,
-        Integer facultyID) {
+
+public record GroupDetailsDTO(String name, Long count) {
 }

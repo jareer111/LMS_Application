@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 
 import java.util.Set;
@@ -23,23 +24,26 @@ public class LMSApplication {
     }
 
 
-//    @Bean
+    @Bean
     public ApplicationRunner applicationRunner() {
         return args -> {
             User student = new User(1,
                     "student@gmail.com",
+                    "1 student",
                     "$2a$10$cxdnqfK3MCxdA82YnuPoku1dDHptndFs.bk.GTElc2molq2MZKaZm",
                     null,
                     Role.STUDENT,
                     UserStatus.ACTIVE);
             User teacher = new User(2,
                     "teacher@gmail.com",
+                    "2 teacher",
                     "$2a$10$cxdnqfK3MCxdA82YnuPoku1dDHptndFs.bk.GTElc2molq2MZKaZm",
                     null,
                     Role.TEACHER,
                     UserStatus.ACTIVE);
             User admin = new User(3,
                     "admin@gmail.com",
+                    "3 admin",
                     "$2a$10$cxdnqfK3MCxdA82YnuPoku1dDHptndFs.bk.GTElc2molq2MZKaZm",
                     null,
                     Role.ADMIN,
