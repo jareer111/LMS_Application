@@ -1,6 +1,6 @@
 # LMS_Application   
 **LMS application DB schema**
-![LMS_DB_schema](https://github.com/jareer111/LMS_Application/assets/113532802/bb69d91d-c04a-496f-b43b-0033b7581f61)
+![LMS_DB_schema](https://github.com/jareer111/LMS_Application/assets/113532802/ab1f6ad9-7615-45ff-9b99-3270b5ce100c)
 
 
 **___________________________________________________________________**
