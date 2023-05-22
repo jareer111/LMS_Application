@@ -9,7 +9,7 @@ import com.jareer.lms.app.dtos.GroupUpdateDTO;
 import com.jareer.lms.app.exceptions.ItemNotFoundException;
 import com.jareer.lms.app.repositories.FacultyRepository;
 import com.jareer.lms.app.repositories.GroupRepository;
-import com.jareer.lms.app.repositories.user.UserRepository;
+import com.jareer.lms.app.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -29,7 +29,7 @@ public class GroupService {
     public Group createGroup(GroupDTO dto) {
         int facultyID = dto.facultyID();
 
-        Faculty faculty = facultyRepository.findById(facultyID).orElseThrow(
+        Faculty faculty = facultyRepository.findFacultyById(facultyID).orElseThrow(
                 () -> new ItemNotFoundException("Faculty not found with id: %d".formatted(facultyID)));
 
         Group group = GROUP_MAPPER.toEntity(dto);
@@ -42,7 +42,7 @@ public class GroupService {
     }
 
     public Page<Group> getAll(Integer page, Integer size) {
-        return groupRepository.findAll(PageRequest.of(page, size));
+        return groupRepository.findAllGroup(PageRequest.of(page, size));
     }
 
     public void deleteGroup(Integer id) {

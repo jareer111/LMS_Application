@@ -31,15 +31,15 @@ public class FacultyService {
     }
 
     public Faculty getFacultyById(Integer id) {
-        return facultyRepository.findById(id).orElseThrow(() -> new ItemNotFoundException("Faculty not found with id: %d".formatted(id)));
+        return facultyRepository.findFacultyById(id).orElseThrow(() -> new ItemNotFoundException("Faculty not found with id: %d".formatted(id)));
     }
 
     public Page<Faculty> getPage(Integer page, Integer size) {
-        return facultyRepository.findAll(PageRequest.of(page, size));
+        return facultyRepository.findAllFaculty(PageRequest.of(page, size));
     }
 
     public void deleteFaculty(Integer id) {
-        Faculty faculty = facultyRepository.findById(id).orElseThrow(() -> new ItemNotFoundException("Faculty not found with id: %d".formatted(id)));
+        Faculty faculty = facultyRepository.findFacultyById(id).orElseThrow(() -> new ItemNotFoundException("Faculty not found with id: %d".formatted(id)));
         faculty.setDeleted(true);
         facultyRepository.save(faculty);
     }

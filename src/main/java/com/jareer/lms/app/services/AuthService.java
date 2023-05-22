@@ -1,4 +1,4 @@
-package com.jareer.lms.app.services.auth;
+package com.jareer.lms.app.services;
 
 import com.jareer.lms.app.configurations.jwt.JwtUtils;
 import com.jareer.lms.app.domains.user.Role;
@@ -9,7 +9,7 @@ import com.jareer.lms.app.dtos.auth.TokenResponse;
 import com.jareer.lms.app.dtos.auth.UserCreateDTO;
 import com.jareer.lms.app.enums.TokenType;
 import com.jareer.lms.app.mappers.UserMapper;
-import com.jareer.lms.app.repositories.user.UserRepository;
+import com.jareer.lms.app.repositories.UserRepository;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;

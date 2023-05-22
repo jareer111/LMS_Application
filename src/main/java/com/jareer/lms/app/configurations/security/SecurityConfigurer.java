@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jareer.lms.app.configurations.jwt.JWTAuthenticationFilter;
 import com.jareer.lms.app.configurations.jwt.JwtUtils;
 import com.jareer.lms.app.dtos.AppErrorDTO;
-import com.jareer.lms.app.repositories.user.UserRepository;
+import com.jareer.lms.app.repositories.UserRepository;
 import jakarta.servlet.ServletOutputStream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.web.client.RestTemplateBuilder;

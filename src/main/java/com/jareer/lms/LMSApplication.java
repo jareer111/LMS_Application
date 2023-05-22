@@ -3,7 +3,7 @@ package com.jareer.lms;
 import com.jareer.lms.app.domains.user.Role;
 import com.jareer.lms.app.domains.user.User;
 import com.jareer.lms.app.enums.UserStatus;
-import com.jareer.lms.app.repositories.user.UserRepository;
+import com.jareer.lms.app.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
@@ -24,7 +24,8 @@ public class LMSApplication {
     }
 
 
-    @Bean
+    // if you need ready users
+   /* @Bean
     public ApplicationRunner applicationRunner() {
         return args -> {
             User student = new User(1,
@@ -50,5 +51,5 @@ public class LMSApplication {
                     UserStatus.ACTIVE);
             userRepository.saveAll(Set.of(student, teacher, admin));
         };
-    }
+    }*/
 }

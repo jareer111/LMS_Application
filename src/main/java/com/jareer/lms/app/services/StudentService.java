@@ -10,12 +10,14 @@ import com.jareer.lms.app.enums.UserStatus;
 import com.jareer.lms.app.exceptions.ItemNotFoundException;
 import com.jareer.lms.app.repositories.GroupRepository;
 import com.jareer.lms.app.repositories.SubjectRepository;
-import com.jareer.lms.app.repositories.user.UserRepository;
+import com.jareer.lms.app.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -49,15 +51,26 @@ public class StudentService {
                 String.valueOf(object[0][5]));
     }
 
+
     public List<StudentMarkDetailsDTO> studentsAndMarksListByGroupId(Integer groupId) {
-        List<Object[]> objects = userRepository.findStudentsAndMarksByGroupId(groupId).orElseThrow(() -> new ItemNotFoundException("Students not found for group with id: %d".formatted(groupId)));
-        ArrayList<StudentMarkDetailsDTO> studentMarkDetailsDTOS = new ArrayList<>();
-        objects.forEach(obj -> studentMarkDetailsDTOS.add(
-                new StudentMarkDetailsDTO(
-                        String.valueOf(obj[1]),
-                        new StudentMarkDTO(String.valueOf(obj[0]),
-                                String.valueOf(obj[2]))
-                )));
-        return studentMarkDetailsDTOS;
+        List<Object[]> objects = userRepository.findStudentsAndMarksByGroupId(groupId)
+                .orElseThrow(() -> new ItemNotFoundException("Students not found for group with id: " + groupId));
+
+        Map<String, List<Object[]>> groupedObjects = objects.stream()
+                .collect(Collectors.groupingBy(obj -> String.valueOf(obj[0])));
+
+        return groupedObjects.entrySet().stream()
+                .map(entry -> {
+                    String subjectName = entry.getKey();
+                    List<StudentMarkDTO> studentMarks = entry.getValue().stream()
+                            .map(obj -> new StudentMarkDTO(
+                                    String.valueOf(obj[1]),
+                                    String.valueOf(obj[2])
+                            ))
+                            .collect(Collectors.toList());
+                    return new StudentMarkDetailsDTO(subjectName, studentMarks);
+                })
+                .collect(Collectors.toList());
     }
+
 }

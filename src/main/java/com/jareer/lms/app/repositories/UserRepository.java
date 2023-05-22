@@ -1,4 +1,4 @@
-package com.jareer.lms.app.repositories.user;
+package com.jareer.lms.app.repositories;
 
 import com.jareer.lms.app.domains.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -33,7 +33,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     Optional<Object[][]> findUserByFullName(String studentFullName);
 
     @Query(value = """
-                        select u.full_name, s.name, sum(m.grade)
+                        select s.name, u.full_name, sum(m.grade)
             from users u
                      left join mark m on u.id = m.user_id
                      left join subject s on m.subject_id = s.id
@@ -41,4 +41,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
             group by s.name, u.full_name order by sum(m.grade) desc ;
                         """, nativeQuery = true)
     Optional<List<Object[]>> findStudentsAndMarksByGroupId(Integer groupId);
+
+
 }

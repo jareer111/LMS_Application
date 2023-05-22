@@ -12,7 +12,7 @@ import com.jareer.lms.app.exceptions.ItemNotFoundException;
 import com.jareer.lms.app.repositories.JournalRepository;
 import com.jareer.lms.app.repositories.MarkRepository;
 import com.jareer.lms.app.repositories.SubjectRepository;
-import com.jareer.lms.app.repositories.user.UserRepository;
+import com.jareer.lms.app.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -37,7 +37,7 @@ public class MarkService {
         int subjectID = dto.subjectID();
         User student = userRepository.findById(studentID).orElseThrow(
                 () -> new RuntimeException("Student not found with id: %d".formatted(studentID)));
-        Journal journal = journalRepository.findById(journalID).orElseThrow(
+        Journal journal = journalRepository.findJournalById(journalID).orElseThrow(
                 () -> new RuntimeException("Journal not found with id: %d".formatted(journalID)));
         Subject subject = subjectRepository.findById(subjectID).orElseThrow(
                 () -> new RuntimeException("Subject not found with id: %d".formatted(subjectID)));
@@ -51,15 +51,15 @@ public class MarkService {
     }
 
     public Mark getMarkById(Integer id) {
-        return markRepository.findById(id).orElseThrow(() -> new ItemNotFoundException("Mark not found with id: %d".formatted(id)));
+        return markRepository.findMarkById(id).orElseThrow(() -> new ItemNotFoundException("Mark not found with id: %d".formatted(id)));
     }
 
     public Page<Mark> getAll(Integer page, Integer size) {
-        return markRepository.findAll(PageRequest.of(page, size));
+        return markRepository.findAllMark(PageRequest.of(page, size));
     }
 
     public void deleteMark(Integer id) {
-        Mark mark = markRepository.findById(id).orElseThrow(() -> new ItemNotFoundException("Mark not found with id: %d".formatted(id)));
+        Mark mark = markRepository.findMarkById(id).orElseThrow(() -> new ItemNotFoundException("Mark not found with id: %d".formatted(id)));
         mark.setDeleted(true);
         markRepository.save(mark);
     }

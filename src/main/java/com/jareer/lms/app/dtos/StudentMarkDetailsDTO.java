@@ -6,12 +6,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
 public class StudentMarkDetailsDTO {
     private String subjectName;
-    private StudentMarkDTO studentMarkDTO;
+    private List<StudentMarkDTO> studentMarkDTO;
 }
 

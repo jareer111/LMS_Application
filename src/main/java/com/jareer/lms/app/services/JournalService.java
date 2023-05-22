@@ -11,7 +11,7 @@ import com.jareer.lms.app.exceptions.ItemNotFoundException;
 import com.jareer.lms.app.repositories.GroupRepository;
 import com.jareer.lms.app.repositories.JournalRepository;
 import com.jareer.lms.app.repositories.SubjectRepository;
-import com.jareer.lms.app.repositories.user.UserRepository;
+import com.jareer.lms.app.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -41,7 +41,7 @@ public class JournalService {
     }
 
     public Page<Journal> getAll(Integer page, Integer size) {
-        return journalRepository.findAll(PageRequest.of(page, size));
+        return journalRepository.findAllJournal(PageRequest.of(page, size));
     }
 
     public void deleteJournal(Integer id) {

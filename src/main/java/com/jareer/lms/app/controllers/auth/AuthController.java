@@ -5,7 +5,7 @@ import com.jareer.lms.app.dtos.auth.RefreshTokenRequest;
 import com.jareer.lms.app.dtos.auth.TokenRequest;
 import com.jareer.lms.app.dtos.auth.TokenResponse;
 import com.jareer.lms.app.dtos.auth.UserCreateDTO;
-import com.jareer.lms.app.services.auth.AuthService;
+import com.jareer.lms.app.services.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

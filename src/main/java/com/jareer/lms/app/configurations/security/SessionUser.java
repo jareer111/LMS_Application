@@ -1,7 +1,7 @@
 package com.jareer.lms.app.configurations.security;
 
 import com.jareer.lms.app.domains.user.User;
-import com.jareer.lms.app.repositories.user.UserRepository;
+import com.jareer.lms.app.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
