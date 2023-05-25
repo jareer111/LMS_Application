@@ -35,8 +35,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<AppErrorDTO> sqlException(DataIntegrityViolationException e, HttpServletRequest request) {
-        return ResponseEntity.status(400)
-                .body(new AppErrorDTO(request.getRequestURI(), "Duplicate entry found.", 400));
+        return ResponseEntity.status(409)
+                .body(new AppErrorDTO(request.getRequestURI(), "Duplicate entry found !", 409));
     }
 
     @ExceptionHandler(AccessDeniedException.class)

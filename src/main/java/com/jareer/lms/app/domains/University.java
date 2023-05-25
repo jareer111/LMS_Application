@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.jpa.domain.AbstractAuditable;
 
 @Setter
 @Getter
@@ -13,7 +14,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"name", "address"}))
-public class University {
+public class University extends AbstractAuditable<University, Integer> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

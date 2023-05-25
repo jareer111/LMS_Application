@@ -1,17 +1,11 @@
 package com.jareer.lms;
 
-import com.jareer.lms.app.domains.user.Role;
-import com.jareer.lms.app.domains.user.User;
-import com.jareer.lms.app.enums.UserStatus;
 import com.jareer.lms.app.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 
-import java.util.Set;
 
 @EnableMethodSecurity
 @SpringBootApplication

@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
@@ -36,12 +37,14 @@ import java.util.List;
 
 @Configuration
 @EnableWebSecurity
+@EnableJpaAuditing(auditorAwareRef = "auditorAware")
 @EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfigurer {
     private final JwtUtils jwtTokenUtil;
     private final UserRepository userRepository;
     private final ObjectMapper objectMapper;
+    private final SessionUser sessionUser;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
